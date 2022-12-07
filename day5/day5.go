@@ -16,7 +16,7 @@ func Day5() {
 	column_map := map[int][]string{}
 	pattern_rows := strings.Split(pattern, "\n")
 	move_rows := strings.Split(strings.TrimSpace(moves), "\n")
-
+    item_rgx := regexp.MustCompile(`\[.]`)
 	for idx, row := range reverse(pattern_rows) {
 		if idx == 0 {
 			continue
@@ -25,26 +25,25 @@ func Day5() {
 
 		for idx, item := range row_items {
 			idx := idx + 1
-			if item != "    " {
-				column_map[idx] = append(column_map[idx], item)
+			if item_rgx.Match([]byte(item)) {
+				column_map[idx] = append(column_map[idx], string(item[1]))
 			}
 		}
 	}
 
-    rgx := regexp.MustCompile(`(\d+)`)
+	rgx := regexp.MustCompile(`(\d+)`)
 
-    for _, move_row := range move_rows {
-        digits := rgx.FindAllString(string(move_row), 3)
-        num_to_move, _ := strconv.Atoi(digits[0])
-        from, _ := strconv.Atoi(digits[1])
-        to, _ := strconv.Atoi(digits[2])
+	for _, move_row := range move_rows {
+		digits := rgx.FindAllString(string(move_row), 3)
+		num_to_move, _ := strconv.Atoi(digits[0])
+		from, _ := strconv.Atoi(digits[1])
+		to, _ := strconv.Atoi(digits[2])
 
-        curr_num_on_stack := len(column_map[from])
-        items_to_move := column_map[from][curr_num_on_stack - num_to_move:]
-        column_map[from] = column_map[from][:curr_num_on_stack - num_to_move]
+		slice_index := len(column_map[from]) - num_to_move
+		items_to_move := column_map[from][slice_index:]
+        column_map[from] = column_map[from][:slice_index]
         column_map[to] = append(column_map[to], items_to_move...)
-    }
-
+	}
     fmt.Println(column_map)
 }
 

@@ -1,7 +1,7 @@
 package main
 
 import (
-	"advent22/day5"
+	"advent22/day6"
 	"log"
 
 	"github.com/joho/godotenv"
@@ -12,9 +12,6 @@ func main() {
 	if err != nil {
 		log.Fatal("Error loading .env file")
 	}
-	// day1.Day1()
-	// day2.Day2()
-	// day3.Day3Part2()
-	// day4.Day4()
-	day5.Day5()
+
+	day6.Day6()
 }
