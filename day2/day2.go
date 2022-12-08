@@ -17,17 +17,17 @@ var paper = Option{}
 var scissors = Option{}
 
 func Day2() {
-    rock.loses = &paper
-    rock.beats = &scissors
-    rock.score = 1
-    paper.loses = &scissors
-    paper.beats = &rock
-    paper.score = 2
-    scissors.loses = &rock
-    scissors.beats = &paper
-    scissors.score = 3
+	rock.loses = &paper
+	rock.beats = &scissors
+	rock.score = 1
+	paper.loses = &scissors
+	paper.beats = &rock
+	paper.score = 2
+	scissors.loses = &rock
+	scissors.beats = &paper
+	scissors.score = 3
 
-    input := helpers.GetPuzzleInput("2")
+	input := helpers.GetPuzzleInput("2")
 
 	s := strings.TrimSpace(input)
 
@@ -45,7 +45,7 @@ func Day2() {
 
 func play(c string, p string, s *int) {
 	var compOption *Option
-    score := 0
+	score := 0
 	switch c {
 	// Lose
 	case "A":
@@ -60,16 +60,16 @@ func play(c string, p string, s *int) {
 		break
 	}
 
-    switch p {
-    case "X":
-        score += compOption.beats.score
-    case "Y":
-        score += compOption.score
-        score += 3
-    case "Z":
-        score += compOption.loses.score
-        score += 6
-    }
+	switch p {
+	case "X":
+		score += compOption.beats.score
+	case "Y":
+		score += compOption.score
+		score += 3
+	case "Z":
+		score += compOption.loses.score
+		score += 6
+	}
 
 	*s += score
 }

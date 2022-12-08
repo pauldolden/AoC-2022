@@ -16,7 +16,7 @@ func Day5() {
 	column_map := map[int][]string{}
 	pattern_rows := strings.Split(pattern, "\n")
 	move_rows := strings.Split(strings.TrimSpace(moves), "\n")
-    item_rgx := regexp.MustCompile(`\[.]`)
+	item_rgx := regexp.MustCompile(`\[.]`)
 	for idx, row := range reverse(pattern_rows) {
 		if idx == 0 {
 			continue
@@ -41,10 +41,10 @@ func Day5() {
 
 		slice_index := len(column_map[from]) - num_to_move
 		items_to_move := column_map[from][slice_index:]
-        column_map[from] = column_map[from][:slice_index]
-        column_map[to] = append(column_map[to], items_to_move...)
+		column_map[from] = column_map[from][:slice_index]
+		column_map[to] = append(column_map[to], items_to_move...)
 	}
-    fmt.Println(column_map)
+	fmt.Println(column_map)
 }
 
 func reverse(s []string) []string {

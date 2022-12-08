@@ -48,53 +48,53 @@ func Day3Part1() {
 func Day3Part2() {
 	input := helpers.GetPuzzleInput("3")
 	priorities := setPriorities()
-    badges := []string{}
-    ss := strings.Split(input, "\n")
+	badges := []string{}
+	ss := strings.Split(input, "\n")
 
-    chunks := chunkSlice(ss, 3)
+	chunks := chunkSlice(ss, 3)
 
-    for _, chunk := range chunks {
-        cs := strings.Split(chunk[0], "")
-        var badge string
-        for _, c := range cs {
-            if strings.Contains(chunk[1], c) && strings.Contains(chunk[2], c) {
-                badge = c
-                break;
-            }
-        }
-        badges = append(badges, badge)
-    }
-    count := 0
-    for _, badge := range badges {
-        count = count + priorities[badge]
-    }
-    fmt.Println(count)
+	for _, chunk := range chunks {
+		cs := strings.Split(chunk[0], "")
+		var badge string
+		for _, c := range cs {
+			if strings.Contains(chunk[1], c) && strings.Contains(chunk[2], c) {
+				badge = c
+				break
+			}
+		}
+		badges = append(badges, badge)
+	}
+	count := 0
+	for _, badge := range badges {
+		count = count + priorities[badge]
+	}
+	fmt.Println(count)
 }
 
 func setPriorities() map[string]int {
 	m := make(map[string]int)
 	for letter := 'a'; letter <= 'z'; letter++ {
 		upper_letter := unicode.ToUpper(letter)
-        // Seems fairly OK to hardcode these as it refers to ASCII value
+		// Seems fairly OK to hardcode these as it refers to ASCII value
 		idx := int(letter) - 96
 		m[string(letter)] = idx
-        m[string(upper_letter)] = idx + 26 // e.g. a = 1, A = 27
+		m[string(upper_letter)] = idx + 26 // e.g. a = 1, A = 27
 	}
 
 	return m
 }
 
 func chunkSlice(s []string, chunkSize int) [][]string {
-    chunks := [][]string{}
+	chunks := [][]string{}
 
-    for i := 0; i < len(s); i += chunkSize {
-        end := i + chunkSize
+	for i := 0; i < len(s); i += chunkSize {
+		end := i + chunkSize
 
-        if (end > len(s)) {
-            end = len(s)
-        }
+		if end > len(s) {
+			end = len(s)
+		}
 
-        chunks = append(chunks, s[i:end])
-    }
+		chunks = append(chunks, s[i:end])
+	}
 	return chunks
 }

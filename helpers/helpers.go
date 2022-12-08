@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"os"
 	"strings"
-    "os"
 )
 
 func GetPuzzleInput(day string) string {
@@ -13,17 +13,16 @@ func GetPuzzleInput(day string) string {
 
 	r := strings.NewReader("")
 
-    path := fmt.Sprint("https://adventofcode.com/2022/day/", day, "/input")
+	path := fmt.Sprint("https://adventofcode.com/2022/day/", day, "/input")
 
 	req, err := http.NewRequest("GET", path, r)
 
 	if err != nil {
 		panic(err)
 	}
-    aoc_key := os.Getenv("AOC_SESSION_KEY")
+	aoc_key := os.Getenv("AOC_SESSION_KEY")
 
-    cookie := fmt.Sprint("session=", aoc_key)
-
+	cookie := fmt.Sprint("session=", aoc_key)
 
 	req.Header.Set("Cookie", cookie)
 
